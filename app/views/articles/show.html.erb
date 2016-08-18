@@ -2,7 +2,19 @@
 	  que ya fue cargado en el controlador en la funcion show.
 -->
 
-<h1><%= @articulo.title %></h1>	
 
-<p><%= @articulo.body %></p>	
+
+<div class="col-md-10 col-md-offset-1">
+	
+	<h1><%= @articulo.title %></h1>	
+	<hr>
+	
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<p><%= @articulo.body %></p>
+		</div>
+	</div>
+	
+</div>
+	
 

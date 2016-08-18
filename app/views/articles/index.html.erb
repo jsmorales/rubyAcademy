@@ -32,7 +32,7 @@
 		 	<%	@articulos.each do |articulo| %>
 				<tr>
 		 			<td><%= articulo.title %></td>
-		 			<td><%= articulo.body %></td>
+		 			<td><%= articulo.body[0..20].gsub(/\s\w+\s*$/,'...') %></td>
 		 			<!-- articulo.id.to_s se utiliza para convertirlo en string ya que es un valor de tipo integer-->
 		 			<td><%= link_to "Ver", "articles/"+articulo.id.to_s %></td>
 		 		</tr>
