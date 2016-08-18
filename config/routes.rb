@@ -1,11 +1,36 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  
+  #get 'welcome/index'
+
+  resources :articles
+
+=begin
+  resources :articles
+
+  es lo mismo que decir
+
+  verbo "ruta" acción
+
+  get "/articles" index
+  post "/articlies" create
+  delete "/articlies" delete 
+  get "/articles/:id" show
+  get "/articles/:new" new
+  get "/articles/:id/edit" edit
+  patch "/articles/:id" update
+  put "/articles/:id" update
+
+  y todos los verbos con todo lo que tenga 
+  articles.    
+=end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
    root 'welcome#index'
+
+  #recordar que el los verbos de las rutas son get,post,patch,put,delete  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

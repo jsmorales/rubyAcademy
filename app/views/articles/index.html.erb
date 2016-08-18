@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Artículos</h3>		
+	</div>
+	<br>
+	<div class="text-right">
+		<%= link_to "Nuevo Artículo", new_article_path, class: "btn btn-success" %> 
+	</div>
+	<div class="panel-body">
+
+		<!-- @articulos.inspect hace las veces de print_r -->		
+
+		<!-- para ingresar datos a la BD por consola seria:
+			rails console
+			Article.create( title:"Primer artículo", body:"Este es mi primer articulo en ruby on rails.", visits_count:0 )
+		 -->
+		 <!-- 
+			ciclo para mostrar todos los articulos
+		 -->
+		 <table class="table table-hover">
+		 	
+		 	<thead>
+		 		<tr>
+		 			<th>Título</th>
+		 			<th>Cuerpo</th>
+		 			<th>Opciones</th>
+		 		</tr>
+		 	</thead>
+
+		 	<tbody>
+
+		 	<%	@articulos.each do |articulo| %>
+				<tr>
+		 			<td><%= articulo.title %></td>
+		 			<td><%= articulo.body %></td>
+		 			<!-- articulo.id.to_s se utiliza para convertirlo en string ya que es un valor de tipo integer-->
+		 			<td><%= link_to "Ver", "articles/"+articulo.id.to_s %></td>
+		 		</tr>
+			<%end%>
+		 		
+		 	</tbody>
+		 </table>
+		 
+	</div>
+</div>
