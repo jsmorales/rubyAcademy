@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get "/articles" index
   post "/articlies" create
-  delete "/articlies" delete 
+  delete "/articles" delete 
   get "/articles/:id" show
   get "/articles/:new" new
   get "/articles/:id/edit" edit

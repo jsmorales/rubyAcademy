@@ -1,20 +1,21 @@
 <!--  Para mostrar el articulo se utiliza @articulo.valor_de_la_tabla
 	  que ya fue cargado en el controlador en la funcion show.
+
+	  si se quisiera poner un link a la vista de edición se haria de la siguiente forma:
+	  link_to "Editar", edit_article_path(@articulo), class: "btn btn-warning"
 -->
-
-
 
 <div class="col-md-10 col-md-offset-1">
 	
 	<h1><%= @articulo.title %></h1>	
 	<hr>
-	
+
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<p><%= @articulo.body %></p>
 		</div>
 	</div>
-	
+
 </div>
 	
 
