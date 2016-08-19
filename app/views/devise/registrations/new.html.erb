@@ -1,0 +1,38 @@
+
+<div class="form-group col-md-4 col-md-offset-4">
+
+  <legend>Registrarme</legend>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="col-md-10">
+      <%= f.label :email, "Correo"%><br />
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="col-md-10">
+      <%= f.label :password, "Contraseña" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
+
+    <div class="col-md-10">
+      <%= f.label :password_confirmation, "Confirmación de Contraseña" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+
+    <div class="form-group col-md-10 text-center">
+      <br />
+      <%= f.submit "Registrarme", class: "btn btn-success"%>
+    </div>
+
+  <% end %>
+
+  <div class="form-group col-md-10 text-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  
+</div>

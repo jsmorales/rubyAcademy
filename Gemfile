@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+#las gemas son como plugins pero de ruby
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -23,6 +23,22 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#-------------------------------------------------------------------------------
+#gema para autenticación de usuario
+gem "devise"
+#para instalar devise en el proyecto se hace
+#bundle install
+#luego se escribe rails g devise:install para ponerlo en el proyecto
+#luego se configurara el mailer
+#para generar el modelo de devise se escribe:
+#rails g devise User
+#esto crea una migracion de BD donde crea la tabla users
+#antes de ejecutar la migracion verificar si todos los campos son correctos y si hay que modificar alguno.
+#las migraciones se hacen con rake db:migrate
+#para generar las vistas se escribe rails g devise:views
+#esto genera todas las vistas de devise para poderlas modificar
+
+#-------------------------------------------------------------------------------
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

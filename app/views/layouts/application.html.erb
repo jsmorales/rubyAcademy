@@ -7,7 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!-- Estas etiquitas se añaden al instalar la gema devise para autenticación de usuarios -->
 
+<!-- un layout es lo que se ve en toda la aplicacion en todas partes, es permanente para todas nuestras páginas. -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -18,37 +20,39 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Blog JsFramework</a>
+				<%= link_to "Blog JsFramework", root_path, class: "navbar-brand" %>
+				<!--<a class="navbar-brand" href="#">Blog JsFramework</a>-->
 			</div>
 	
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<div class="collapse navbar-collapse navbar-ex1-collapse">					
 				
-				<ul class="nav navbar-nav">
-					<!-- ejemplo de links dinámicos con ruby -->
-					<li><%= link_to "Inicio", root_path %></li>
-					<li><%= link_to "Artículos", articles_path %></li>
-					<li><a href="#">Programación</a></li>
-					<li><a href="#">Tecnología</a></li>
-				</ul>
-				
-				<ul class="nav navbar-nav navbar-right">					
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nom Usuario <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li><a href="#">Separated link</a></li>
-						</ul>
-					</li>
-				</ul>
+				<%= render "partials/navigation" %>
 
 			</div><!-- /.navbar-collapse -->
 		</div>
 	</nav>
 
-<%= yield %>
+	<!-- validador de las notificaciones de inicio de sesion -->
+	<% if alert != nil %>
+		
+		<div class="alert alert-danger col-md-4 col-md-offset-4">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Alerta!</strong> <p class=""><%= alert %></p>
+		</div>
+		<br><br><br><br>
+
+	<% elsif notice != nil%>
+		
+		<div class="alert alert-info col-md-4 col-md-offset-4">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Noticia!</strong> <p class=""><%= notice %></p>
+		</div>
+		<br><br><br><br>
+
+	<%end%>
+
+	<%= yield %>
 
 </body>
 </html>

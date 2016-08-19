@@ -1,0 +1,34 @@
+<!-- 
+Esta vista parcial es para ver el menu de navegacion segun el inicio de sesion.
+-->
+
+	<% if user_signed_in? %>
+	<!-- esto solo aparece cuando el usuario ha iniciado sesión, todo es manejado por devise -->
+	<ul class="nav navbar-nav">
+		<!-- ejemplo de links dinámicos con ruby -->		
+		<li><%= link_to "Artículos", articles_path %></li>
+		<li><a href="#">Programación</a></li>
+		<li><a href="#">Tecnología</a></li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %><b class="caret"></b></a>
+			<!-- current_user es el objeto que contiene toda la informacion del usuario. -->
+			<ul class="dropdown-menu">
+				<li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %></li>			
+			</ul>
+		</li>
+	</ul>
+	<% else %>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Sesión <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><%= link_to "Iniciar Sesión", new_user_session_path %></li>
+					<li><%= link_to "Registrarme", new_user_registration_path %></li>			
+				</ul>
+					<!--  -->
+			</li>
+		</ul>
+	<%end%>
+	
