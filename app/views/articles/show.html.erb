@@ -6,10 +6,34 @@
 -->
 
 <div class="col-md-10 col-md-offset-1">
+	<!-- Breadcrumb para la vista de los artículos -->
+	<ol class="breadcrumb">
+		<li>
+			<%= link_to "Inicio", root_path %>
+		</li>
+		<li>
+			<%= link_to "Articulos", articles_path %>
+		</li>
+		<li class="active">Artículo: <%= @articulo.title %></li>
+
+	</ol>
 	
 	<h1><%= @articulo.title %></h1>	
 	<hr>
-
+	<!-- al tener la relacion de usuarios articulos
+	se puede acceder a la información de esta misma
+	de la siguiente manera:
+	 -->
+	<%if @articulo.user != nil %>
+		<span class="badge">Escrito por: <%= @articulo.user.email %></span>
+		<br><br>		
+	<%else %>		
+		<span class="badge">Este artículo no tiene autor.</span>
+		<br><br>
+	<%end%>
+	<span class="badge">Visitas: <%= @articulo.visits_count %></span>
+	<br><br>
+	<!--  -->
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<p><%= @articulo.body %></p>

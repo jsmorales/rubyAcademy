@@ -2,10 +2,11 @@
 
   <legend>Iniciar Sesión</legend>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>    
+
     <div class="col-md-10">
       <%= f.label :email, "Correo Electrónico" %><br />
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      <%= f.email_field :email, class: "form-control" %>
     </div>
 
     <div class="col-md-10">

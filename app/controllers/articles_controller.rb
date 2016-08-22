@@ -1,5 +1,20 @@
 class ArticlesController < ApplicationController
 
+	#se declara que antes de cada accion menos show e index
+	#se debe ejecutar validar_usuarios
+	#before_action :validar_usuarios, except: [:show,:index]
+	#para optimizar mejor se utiliza un helper llamado authenticate_user!
+	before_action :authenticate_user!, except: [:show,:index]
+	#este helper ya esta listo para saber si esta autenticado o no
+	#y permitir o no el acceso al modulo al cual se quiere acceder.
+
+	#otro callback seria set_articulo
+	before_action :set_articulo, except: [:new,:create,:index]
+	#---------------------------------------------------------------------
+
+	#este ejecuta @articulo = Article.find(params[:id]) para no estar
+	#repitiendo constantemente este trozo de código
+
 	#se define la primera acción para articles index
 	#GET articles/
 	def index
@@ -24,13 +39,19 @@ class ArticlesController < ApplicationController
 		#para mostrar cada uno de estos se crea una variable global utilizando un metodo
 		#del active record llamado find, para saber cual es el id se utiliza params[:id]
 		#esto carga los valores dentro de mi variable @articulo
-		@articulo = Article.find(params[:id])
+		
+		#@articulo = Article.find(params[:id]) optimizado por set_articulo en el callback
+			
 		#para buscar de otra forma se puede utilizar where de la siguiente forma:
 		#Article.where("id = ?",params[:id])
 		#también se puede utilizar un not 
 		#Article.where.not("id = ?",params[:id])
 		#el simbolo de interrogacion simboliza lo que se pasa por el valor despues de la coma
 		#Article.where("id = ? OR title= ?",params[:id],params[:title])
+
+		#se define que se debe ejecutar un metodo del modelo luego de pasar por aca
+		#para que actualize las visitas del articulo
+		@articulo.update_visitas 
 	end
 
 	#se define la accion new para articles
@@ -56,7 +77,14 @@ class ArticlesController < ApplicationController
 		#gracias a los strong params definidos en la parte privada
 		#Forma insegura @articulo = Article.new(params[:article]) 
 		#Forma segura con Strong Params
-		@articulo = Article.new(articulo_params)
+		
+		#@articulo = Article.new(articulo_params) este nos sirve si no hay que relacionarlo con usuario
+		#para relacionar con un usuario se cambia el metodo de guardado de la siguiente manera
+		@articulo = current_user.articles.new(articulo_params)
+		#current_user es el objeto de usuario este ahora tiene un metodo articles
+		#porque en el modelo se configuro la relacion de 1 a muchos.
+		#has_many :articles
+
 		#--------------------------------------------------------------------- 
 		#para saber cuales son los parametros se debe ver el name en cada elemento.
 		#con esto se toman los parametros pasados por el formulario
@@ -84,7 +112,7 @@ class ArticlesController < ApplicationController
 	def destroy
 		#la vista es ...
 		#sebusca cual es el articulo a eliminar dentro de una variable
-		@articulo = Article.find(params[:id])
+		#@articulo = Article.find(params[:id]) --optimizado por callback
 		#luego de tener el articulo se ejecuta el metodo destroy
 		@articulo.destroy
 		#en este caso se redirige a la vista de articulos
@@ -97,7 +125,7 @@ class ArticlesController < ApplicationController
 	#get articles/:id/edit
 	def edit
 		#esto carga la vista
-		@articulo = Article.find(params[:id])
+		#@articulo = Article.find(params[:id])  --optimizado por callback
 	end
 
 	#se define la funcion update para actualizar
@@ -107,7 +135,7 @@ class ArticlesController < ApplicationController
 		#para actualizar se hace de la siguiente forma
 		#@articulo.update_attributes({title: 'Nuevo titulo'})
 		#se carga el articulo
-		@articulo = Article.find(params[:id])
+		#@articulo = Article.find(params[:id])  --optimizado por callback
 		#se actualiza con el metodo update y se le pasan los strong params
 		#y se valida en el momento 
 		if @articulo.update(articulo_params)
@@ -139,5 +167,27 @@ class ArticlesController < ApplicationController
 		params.require(:article).permit(:title,:body)
 	end
 
+	#se define una funcion llamada set_articulo que setea un array con los
+	#datos del articulo segun el id
+	def set_articulo
+		#esta funcion hace refactor de el trozo de codigo:
+		@articulo = Article.find(params[:id])
+		#lo cual me permite no repetirlo cada vez que inicia
+		#una funcion que necesita inicializar el array con los
+		#datos del artículo.
+	end
+
+	#se define un metodo para validar si el usuario ha iniciado sesion
+	#y poder ejecutar las acciones de este controlador
+
+=begin
+	def validar_usuarios
+		
+		if user_signed_in?
+			redirect_to new_user_session_path, notice: "Se necesita iniciar sesión."
+		end
+
+	end
+=end
 
 end
