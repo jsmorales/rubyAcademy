@@ -1,0 +1,26 @@
+<!-- el form va @article,@comment por la dependencia de los comentarios del articulo. -->
+<%= form_for([@articulo,@comment]) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">    
+      <%= f.text_area :body, placeholder: "Escribe acá tu comentario.", class: "form-control"%>
+    </div>
+    <br><br><br><br>
+    <div class="col-md-10 col-md-offset-1">
+      <%= f.submit "Comentar", class: "btn btn-success" %>
+    </div>
+  </div>
+  <br>
+
+<% end %>

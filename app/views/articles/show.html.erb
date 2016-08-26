@@ -40,6 +40,40 @@
 		</div>
 	</div>
 
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">Comentarios</h3>
+		</div>
+		<div class="panel-body">
+			<!-- aca se renderiza el formulario creado para los comentarios. -->
+			<%= render "comments/form" %>
+			</br>
+			<div class="panel panel-default">
+				<!-- Default panel contents -->
+				<div class="panel-heading"></div>
+							
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Usuario</th>
+							<th>Comentario</th>
+						</tr>						
+					</thead>
+					<tbody>
+					<%@articulo.comments.each do |comentario|%>
+						<tr>
+							<td><%= comentario.user.email%></td>
+							<td><%= comentario.body%></td>
+						</tr>						
+					<%end%>						
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
 </div>
 	
 

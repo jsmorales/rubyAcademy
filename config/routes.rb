@@ -1,9 +1,24 @@
 Rails.application.routes.draw do
+
+
+=begin
+  los recursos anidados o nested resources son recursos que 
+  dependen de otro como en este caso los comentarios dependen
+  de los articulos.
+  para usar uno de esos recursos se escribe:
+
+  resources :modulo do
+    resources :modulo_dependiente
+  end
+
+=end
   
   devise_for :users
   #get 'welcome/index'
 
-  resources :articles
+  resources :articles do
+    resources :comments, only: [:create, :destroy, :update]
+  end
 
 =begin
   resources :articles

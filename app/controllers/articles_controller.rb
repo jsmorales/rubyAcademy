@@ -51,7 +51,10 @@ class ArticlesController < ApplicationController
 
 		#se define que se debe ejecutar un metodo del modelo luego de pasar por aca
 		#para que actualize las visitas del articulo
-		@articulo.update_visitas 
+		@articulo.update_visitas
+		#se inicializa un nuevo comentario ya que se muestra
+		#el form de nuevo comentario para que pueda ser creado allí.
+		@comment = Comment.new 
 	end
 
 	#se define la accion new para articles

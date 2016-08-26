@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   #Para terminar la relacion se escribe lo siguiente para configurar que
   #un usuario tiene varios articulos:
   has_many :articles
-
+  has_many :comments
   #para hacer una comprobacion se escribe en la consola rails
   #Article.last.user, debe dar el resultado segun el usuario y
   #sus articulos.

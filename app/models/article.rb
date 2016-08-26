@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
 	#luego en el modelo se escribe lo siguiente para que sepa que pertenece
 	#a esa entidad.
 	belongs_to :user
+	has_many :comments
 	#y en el modelo del usuario se escribe has_many :articles lo cual
 	#crea una relacion de uno a muchos.
 	
@@ -25,7 +26,8 @@ class Article < ActiveRecord::Base
 	#en caso de querer validar con expresiones regulares se hace de la siguiente forma
 	#validates :campod_bd , format: { with: /expresion_regular/ }
 
-	#para setear el valor de las visitas visits_count se puede ejecutar un callback
+	#callbacks-------------------------------------------------------------------------------------------
+	#para setear el valor de las visitas visits_count se puede ejecutar un callback----------------------
 	#llamado before_create:
 
 	before_create :num_visitas
@@ -46,5 +48,5 @@ class Article < ActiveRecord::Base
 	def num_visitas
 		self.visits_count = 0
 	end
-
+	#-----------------------------------------------------------------------------------------------------
 end
